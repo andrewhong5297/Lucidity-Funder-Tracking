@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 description: SecurityToken for Ethereum
-repository: https://github.com/graphprotocol/example-subgraph
+repository: https://github.com/andrewhong5297/Lucidity-Funder-Tracking
 schema:
   file: ./schema.graphql
 dataSources:
@@ -8,7 +8,7 @@ dataSources:
     name: SecurityToken
     network: Rinkeby
     source:
-      address: "0x5D49B56C954D11249F59f03287619bE5c6174879"
+      address: "0xE6a9cf47cA7e6692a6c27EB0D59e857C5b160E86"
       abi: SecurityToken
     mapping:
       kind: ethereum/events
@@ -17,9 +17,9 @@ dataSources:
       entities:
         - FundingToken
       abis:
-        - name: Gravity
+        - name: SecurityToken
           file: ./abis/SecurityToken.json
       eventHandlers:
-        - event: newFunder(address, uint256, uint256)
+        - event: newFunder(address,uint256,uint256)
           handler: handleNewFunding
       file: ./src/mapping.ts

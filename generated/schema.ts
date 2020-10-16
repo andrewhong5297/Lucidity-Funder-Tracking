@@ -12,7 +12,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class Gravatar extends Entity {
+export class FundingToken extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -20,17 +20,17 @@ export class Gravatar extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Gravatar entity without an ID");
+    assert(id !== null, "Cannot save FundingToken entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save Gravatar entity with non-string ID. " +
+      "Cannot save FundingToken entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("Gravatar", id.toString(), this);
+    store.set("FundingToken", id.toString(), this);
   }
 
-  static load(id: string): Gravatar | null {
-    return store.get("Gravatar", id) as Gravatar | null;
+  static load(id: string): FundingToken | null {
+    return store.get("FundingToken", id) as FundingToken | null;
   }
 
   get id(): string {
@@ -42,30 +42,21 @@ export class Gravatar extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get owner(): Bytes {
-    let value = this.get("owner");
-    return value.toBytes();
+  get fundingvalue(): BigInt {
+    let value = this.get("fundingvalue");
+    return value.toBigInt();
   }
 
-  set owner(value: Bytes) {
-    this.set("owner", Value.fromBytes(value));
+  set fundingvalue(value: BigInt) {
+    this.set("fundingvalue", Value.fromBigInt(value));
   }
 
-  get displayName(): string {
-    let value = this.get("displayName");
-    return value.toString();
+  get tenor(): BigInt {
+    let value = this.get("tenor");
+    return value.toBigInt();
   }
 
-  set displayName(value: string) {
-    this.set("displayName", Value.fromString(value));
-  }
-
-  get imageUrl(): string {
-    let value = this.get("imageUrl");
-    return value.toString();
-  }
-
-  set imageUrl(value: string) {
-    this.set("imageUrl", Value.fromString(value));
+  set tenor(value: BigInt) {
+    this.set("tenor", Value.fromBigInt(value));
   }
 }

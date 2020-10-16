@@ -1,22 +1,10 @@
-import { NewGravatar, UpdatedGravatar } from '../generated/Gravity/Gravity'
-import { Gravatar } from '../generated/schema'
+import { newFunder } from '../generated/SecurityToken/SecurityToken'
+import { FundingToken } from '../generated/schema'
 
-export function handleNewGravatar(event: NewGravatar): void {
-  let gravatar = new Gravatar(event.params.id.toHex())
-  gravatar.owner = event.params.owner
-  gravatar.displayName = event.params.displayName
-  gravatar.imageUrl = event.params.imageUrl
-  gravatar.save()
-}
-
-export function handleUpdatedGravatar(event: UpdatedGravatar): void {
-  let id = event.params.id.toHex()
-  let gravatar = Gravatar.load(id)
-  if (gravatar == null) {
-    gravatar = new Gravatar(id)
-  }
-  gravatar.owner = event.params.owner
-  gravatar.displayName = event.params.displayName
-  gravatar.imageUrl = event.params.imageUrl
-  gravatar.save()
+export function handleNewFunding(event: newFunder): void {
+  let fundingToken = new FundingToken(event.params.funder.toHex())
+  fundingToken.id = event.params.funder.toHex()
+  fundingToken.fundingvalue = event.params.value
+  fundingToken.tenor = event.params.tenor
+  fundingToken.save()
 }
