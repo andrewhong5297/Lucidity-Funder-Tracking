@@ -23,11 +23,6 @@
       },
       {
         "internalType": "address",
-        "name": "_holder",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "projectOwner",
         "type": "address"
       },
@@ -198,6 +193,12 @@
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
       {
         "indexed": false,
         "internalType": "address",
@@ -769,6 +770,19 @@
       }
     ],
     "name": "setApprovalForAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_holder",
+        "type": "address"
+      }
+    ],
+    "name": "setHolder",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

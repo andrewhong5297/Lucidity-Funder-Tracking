@@ -5,12 +5,31 @@ schema:
   file: schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: SecurityToken
-    network: rinkeby
+    name: TokenFactory
+    network: mainnet
     source:
-      address: "0xE6a9cf47cA7e6692a6c27EB0D59e857C5b160E86"
+      address: "0xFccc25BB40d52ab78b4736D4576D7ff594103C45"
+      abi: TokenFactory
+      startBlock: 1
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TokenFactory
+      abis:
+        - name: TokenFactory
+          file: TokenFactory\abis\TokenFactory.json
+      eventHandlers:
+        - event: NewProject(string,string,address,address,address,address)
+          handler: handleNewProject
+      file: TokenFactory\TokenFactory.wasm
+templates:
+  - kind: ethereum/contract
+    name: SecurityToken
+    network: mainnet
+    source:
       abi: SecurityToken
-      startBlock: 7000000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -21,6 +40,6 @@ dataSources:
         - name: SecurityToken
           file: SecurityToken\abis\SecurityToken.json
       eventHandlers:
-        - event: newFunder(address,uint256,uint256)
+        - event: newFunder(uint256,address,uint256,uint256)
           handler: handleNewFunding
-      file: SecurityToken\SecurityToken.wasm
+      file: TokenFactory\TokenFactory.wasm
